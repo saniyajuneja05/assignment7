@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <style>
+            .error{color:#ffoooo;}
+        </style>
+    </head>
+    <body>
+    <?php
+        $namearr=$emailarr=$genderarr=$websitearr="";
+        $name=$email=$gender=$comment=$website;
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            if(empty($_POST["name"]))
+            {
+                $namearr = "Name is required";
+            }
+            else
+            {
+                $name=test_input($_POST["name"]);
+                if(!preg_match("/^[a-zA-z-']*$/",$name))
+                {
+                    $namearr="Only letters and white space allowed";
+                }
+            }
+        }
+        if(empty($_POST["email"]))
+        {
+            $emailrr = "Email is required";
+        }
+        else
+        {
+            $email=test_input($_POST["email"]);
+            if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+            {
+                $emailrr="Invalid email format";
+            }
+        }
+        if(empty($_POST["website"]))
+        {
+            $website="";
+        }
+        else
+        {
+            $website=test_input($_POST["website"]);
+            $website="";
+        }
+        if(empty($_POST["comment"]))
+        {
+            $comment="";
